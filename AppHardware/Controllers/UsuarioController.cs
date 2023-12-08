@@ -12,6 +12,8 @@ namespace AppHardware.Controllers
 {
     public class UsuarioController : Controller
     {
+        // TODO: I think context is a generic name. If call it something like database or baseDeDatos or db then you may call
+        // _database.Usuarios.<method> which is clearer.
         private readonly HardwareDatabaseContext _context;
 
         public UsuarioController(HardwareDatabaseContext context)
@@ -33,6 +35,7 @@ namespace AppHardware.Controllers
                 return NotFound();
             }
 
+            // TODO: This can be constant
             var usuario = await _context.Usuarios
                 .FirstOrDefaultAsync(m => m.UsuarioId == id);
             if (usuario == null)
@@ -49,11 +52,15 @@ namespace AppHardware.Controllers
             return View();
         }
 
+        // TODO: "Create" is not needed. POST method implies the creation of an entity
         // POST: Usuario/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        // TODO: Be carefull with methods that are named the same but has different signatures. Unless you do it for an explicit reason
+        // It's use in polymorphism (https://www.w3schools.com/java/java_polymorphism.asp) scenarios, but in other cases it may be confusing.
+        // Maybe you can call this method Create and the get one GetCreate or CreateView I don't know
         public async Task<IActionResult> Create([Bind("UsuarioId,Nombre,Apellido, isIT, Password")] Usuario usuario)
         {
             if (ModelState.IsValid)
@@ -74,6 +81,7 @@ namespace AppHardware.Controllers
             }
 
             var usuario = await _context.Usuarios.FindAsync(id);
+            return (usuario == null) ? NotFound() : View(usuario)
             if (usuario == null)
             {
                 return NotFound();
@@ -81,6 +89,7 @@ namespace AppHardware.Controllers
             return View(usuario);
         }
 
+        // TODO: "Edit" is not needed. You can use PATCH method. Here is a list of http methods https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods
         // POST: Usuario/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -134,6 +143,7 @@ namespace AppHardware.Controllers
             return View(usuario);
         }
 
+        // TODO: Here you can use DELETE http method
         // POST: Usuario/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
