@@ -22,6 +22,7 @@ namespace AppHardware.Controllers
         // GET: Registro
         public async Task<IActionResult> Index()
         {
+            // TODO: This can be constant
             var hardwareDatabaseContext = _context.Registros.Include(r => r.Producto).Include(r => r.Usuario);
             return View(await hardwareDatabaseContext.ToListAsync());
         }
@@ -72,6 +73,7 @@ namespace AppHardware.Controllers
             return View();
         }
 
+        // TODO: "Create" is not needed. POST method implies the creation of an entity
         // POST: Registro/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.

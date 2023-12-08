@@ -15,6 +15,7 @@ namespace AppHardware.Migrations
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
+// TODO: What is this warning disable?
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "6.0.0")

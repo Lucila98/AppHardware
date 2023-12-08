@@ -17,7 +17,7 @@ namespace AppHardware.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-
+            // TODO: Missing down coding
 
         }
     }
