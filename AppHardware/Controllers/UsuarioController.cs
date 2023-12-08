@@ -13,7 +13,7 @@ namespace AppHardware.Controllers
     public class UsuarioController : Controller
     {
         // TODO: I think context is a generic name. If call it something like database or baseDeDatos or db then you may call
-        // _database.Usuarios.<method>
+        // _database.Usuarios.<method> which is clearer.
         private readonly HardwareDatabaseContext _context;
 
         public UsuarioController(HardwareDatabaseContext context)

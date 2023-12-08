@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace AppHardware.Models
 {
-    // TODO: This can be part of the database
+    // TODO: This can be part of the database, right?
     public enum Categoria
     {
         Laptops,
