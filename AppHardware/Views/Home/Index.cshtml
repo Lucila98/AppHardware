@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<section class="header">
+    <h1 class="display-4">App Hardware</h1>
+    <p>
+        El siguiente sitio le permitirá llevar un registro de los elementos de hardware
+        entregados a los usuarios de la empresa
+    </p>
+    <div>
+        <ul class="botones">
+            <li class="btn">
+                <a class="btn" asp-area="" asp-controller="Registro" asp-action="Create">Realizar entrega</a>
+            </li>
+
+            <li class="btn">
+                <a class="btn" asp-area="" asp-controller="Registro" asp-action="Index">Realizar devolución</a>
+            </li>
+        </ul>
+    </div>
+    <img src="~/Images/picture1.jpg" width="100%"/>
+</section>
+

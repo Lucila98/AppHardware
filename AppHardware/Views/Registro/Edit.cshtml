@@ -1,0 +1,76 @@
+﻿@model AppHardware.Models.Registro
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Editar</h1>
+
+<h4>Registro</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="RegistroId" />
+            <div class="form-group">
+                <label asp-for="UsuarioId" class="control-label">Usuario</label>
+                <select asp-for="UsuarioId" class="form-control" asp-items="ViewBag.UsuarioId" disabled></select>
+                <span asp-validation-for="UsuarioId" class="text-danger" disabled></span>
+                <input type="hidden" asp-for="UsuarioId" />
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductoId" class="control-label">Producto</label>
+                <select asp-for="ProductoId" class="form-control" asp-items="ViewBag.ProductoId" disabled></select>
+                <span asp-validation-for="ProductoId" class="text-danger" disabled></span>
+                <input type="hidden" asp-for="ProductoId" />
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaEntrega" class="control-label"></label>
+                <input asp-for="FechaEntrega" class="form-control" />
+                <span asp-validation-for="FechaEntrega" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaDevolucion" class="control-label"></label>
+                <input asp-for="FechaDevolucion" class="form-control" />
+                <span asp-validation-for="FechaDevolucion" class="text-danger" ></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cantidad" class="control-label"></label>
+                <input asp-for="Cantidad" class="form-control" disabled />
+                <span asp-validation-for="Cantidad" class="text-danger" disabled></span>
+                <input type="hidden" asp-for="Cantidad" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Volver al listado</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+        function validarFechaDevolucion() {
+            var fechaEntrega = new Date('@Model.FechaEntrega.ToString("yyyy-MM-dd")');
+            var fechaDevolucion = new Date($('#FechaDevolucion').val());
+
+            if (fechaDevolucion < fechaEntrega) {
+                alert('La fecha de devolución debe ser posterior a la fecha de entrega.');
+                return false;
+            }
+
+            return true;
+        }
+
+        $(document).ready(function () {
+            $('form').submit(function () {
+                return validarFechaDevolucion();
+            });
+        });
+    </script>
+}

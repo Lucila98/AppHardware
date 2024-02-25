@@ -1,0 +1,37 @@
+﻿@model IEnumerable<AppHardware.Models.Stock>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Depósito</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Producto.NombreCompleto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Producto.NombreCompleto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantidad)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Editar cantidad</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Ver detalle</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

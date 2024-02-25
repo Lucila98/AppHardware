@@ -1,0 +1,49 @@
+﻿@model AppHardware.Models.Registro
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Registrar entrega</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UsuarioId" class="control-label">Usuario</label>
+                <select asp-for="UsuarioId" class="form-control" asp-items="ViewBag.UsuarioId">
+                    <option value="-1">Seleccionar usuario...</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="ProductoId" class="control-label">Producto</label>
+                <select asp-for="ProductoId" class="form-control" asp-items="ViewBag.ProductoId">
+                    <option value="-1">Seleccionar producto...</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="FechaEntrega" class="control-label"></label>
+                <input asp-for="FechaEntrega" class="form-control" />
+                <span asp-validation-for="FechaEntrega" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cantidad" class="control-label"></label>
+                <input asp-for="Cantidad" class="form-control" />
+                <span asp-validation-for="Cantidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Entregar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Ir al listado de entregas..</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

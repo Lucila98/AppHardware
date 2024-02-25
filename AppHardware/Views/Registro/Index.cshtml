@@ -1,0 +1,91 @@
+﻿@model IEnumerable<AppHardware.Models.Registro>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Listado de entregas</h1>
+
+<h4>Para devolver un producto haga clic en 'Devolver' y modifique la fecha de devolución</h4>
+
+<div>
+    <label for="searchInput">Buscar por usuario:</label>
+    <input type="text" id="searchInput" oninput="filterTable()">
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Usuario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Producto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaEntrega)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaDevolucion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuario.NombreCompleto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Producto.NombreCompleto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaEntrega)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaDevolucion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantidad)
+            </td>
+
+            <td>
+                    @if (item.FechaDevolucion == null)
+                    {
+                        <a asp-action="Edit" asp-route-id="@item.RegistroId">Devolver | </a>
+ 
+                    } 
+                <a asp-action="Details" asp-route-id="@item.RegistroId">Ver detalles</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+@section scripts{
+    <script>
+        function filterTable() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("searchInput");
+            filter = input.value.toUpperCase();
+            table = document.querySelector("table");
+            tr = table.getElementsByTagName("tr");
+
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+    }
